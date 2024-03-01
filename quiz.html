@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main
+        {
+            width: 100%;
+            height: 100vh;
+            background-color: cornflowerblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .box
+        {
+            width: 600px;
+            background-color: white ;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .row
+        {
+            padding: 15px;
+            width: 100%;
+        }
+        .btn
+        {
+
+            width: 100%;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="main">
+
+        <div class="box">
+
+                <h2 id="questionBox">1 This is a dummy question</h2>
+
+                <div class="row">
+                    <input class="options"  type="radio" name="option" id="option1" value="a">
+                    <label for="option1">option1</label>
+                </div>
+            
+                <div class="row">
+                    <input class="options"   type="radio" name="option" id="option2" value="b">
+                    <label for="option2">option2</label>
+                </div>
+
+                <div class="row">
+                    <input class="options" type="radio" name="option" id="option3" value="c">
+                    <label for="option3">option3</label>
+                </div>
+
+                <div class="row">
+                    <input class="options" type="radio" name="option" id="option4" value="d">
+                    <label for="option4">option4</label>
+                </div>
+
+                
+                <button id="btn">Submit</button>
+
+        </div>
+    </div>
+
+
+
+    <script>
+
+        let questions=[
+            {
+               que:" Who sang the title song for the latest Bond film, No Time to Die?",
+               a:"Adele",
+               b:"Sam Smith",
+               c:"Billie Eilish",
+               d:"none",
+               correct:"c"
+
+
+            },
+            {
+               que:" Which flies a green, white, and orange (in that order) tricolor flag? ",
+               a:"Ireland",
+               b:"Ivory Coast",
+               c:"Italy",
+               d:"none",
+               correct:"a"
+
+
+            },
+            {
+               que:"What company makes the Xperia model of smartphone?",
+               a:"Samsung",
+               b:"Sony",
+               c:"Nokia",
+               d:"none",
+               correct:"b"
+
+
+            },
+            {
+               que:"Which city is home to the Brandenburg Gate?",
+               a:"Vienna",
+               b:"Zurich",
+               c:"Asa",
+               d:"Berlin",
+               correct:"d"
+            },
+        ];
+
+        let questionBox=document.getElementById("questionBox");
+        let optionsInput=document.querySelectorAll(".options");
+
+
+        //for each loop only works with the array which is selected by" [querySelectorAll]"
+
+        let submitButton=document.getElementById("btn");
+        let box=document.querySelector('.box');
+
+        let TotalQuestion=questions.length;
+        let score=0;
+
+        let reset=()=>
+        {
+           optionsInput.forEach((options)=>
+           {
+                options.checked=false;
+           });
+        }
+
+
+        let displayScore=()=>
+        {
+
+
+            while(box.firstChild)
+            {
+                box.removeChild(box.firstChild);
+            }
+
+            let h3=document.createElement('h3');
+
+            h3.textContent=`you scored ${score}/${TotalQuestion}`;
+
+            box.appendChild(h3);
+
+
+            
+            
+
+        
+        };
+        let index=0;
+        let loadQuestion=()=>
+        {
+
+            if(index==TotalQuestion)
+            {
+                displayScore();
+                return ;
+            }
+            reset();
+            let data=questions[index];
+            let question=data.que;
+
+            questionBox.innerHTML=`${index+1}) ${question}`
+
+
+            optionsInput[0].nextElementSibling.innerHTML=data.a;
+            optionsInput[1].nextElementSibling.innerHTML=data.b;
+            optionsInput[2].nextElementSibling.innerHTML=data.c;
+            optionsInput[3].nextElementSibling.innerHTML=data.d;
+
+
+        };
+
+        loadQuestion();
+
+
+
+        submitButton.addEventListener('click',()=>
+        {   
+            let data=questions[index];
+
+            let answer=getans();
+
+            if(answer===data.correct)
+            {
+                score++;
+            }
+            index++;
+
+           if(answer!=undefined)
+           {
+            loadQuestion();
+           }
+        });
+
+        let getans=()=>
+        {
+            let ans;
+            optionsInput.forEach((options)=>
+            {
+                if(options.checked)
+                {
+                    ans=options.value;
+                }
+            });
+
+            return ans;
+        };
+
+       
+
+    </script>
+</body>
+</html>

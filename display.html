@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Image</title>
+</head>
+<body>
+    <h1>Uploaded Image</h1>
+    <img src="" alt="Uploaded Image" id="uploaded-image">
+    
+    <script>
+        // JavaScript to display the uploaded image on this page
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get("image");
+
+        if (imageUrl) {
+            const uploadedImage = document.getElementById("uploaded-image");
+            uploadedImage.src = imageUrl;
+        }
+    </script>
+</body>
+</html>

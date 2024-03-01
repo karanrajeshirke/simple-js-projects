@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <style>
+
+        #maindiv
+        {
+            height: 100vh;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+    <div class="container">
+
+
+
+        <h1 class="text-center">Temperature Convertor</h1>
+
+
+        <div class="row text-center d-flex justify-content-center align-items-center " id="maindiv" >
+
+            <div class="col-md-5 ">
+
+                <label for="">Celcius</label>
+                <br>
+                <input type="number" id="celcius" value="0">
+            </div>
+            <div class="col-md-5 ">
+                <label for="">Fahrenheit</label>
+                <br>
+                <input type="number" id="fahrenheit" value="32">
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <script>
+
+        let cel=document.getElementById("celcius");
+        let fah=document.getElementById("fahrenheit");
+
+        cel.addEventListener('input',function()
+        {
+            let C=this.value;
+            let fah_val=(C*(9/5))+32;
+
+            if(!Number.isInteger(fah_val))
+            {
+                fah_val=fah_val.toFixed(4);
+            }
+
+            fah.value=fah_val;
+        })
+
+
+        fah.addEventListener('input',function()
+        {
+            let F=this.value;
+
+            let C_val=(F-32)/1.8;
+
+            if(!Number.isInteger(C_val))
+            {
+                C_val=C_val.toFixed(4);
+            }
+            cel.value=C_val;
+        })
+    </script>
+    
+</body>
+</html>

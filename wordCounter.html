@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter</title>
+</head>
+<body>
+    <div class="container">
+
+
+        <textarea name="ta" id="textarea" cols="30" rows="10"></textarea>
+
+        <br>
+
+        <span id="words">0</span> words & <span id="characters">0</span> characters
+    </div>
+
+
+    <script>
+        let text=document.getElementById("textarea");
+        
+        text.addEventListener('input',function()
+        {
+            let characters=text.value.length;
+            document.getElementById("characters").innerHTML=characters;
+
+
+            let words=text.value.trim();
+            let wordsArr=words.split(" ");
+
+            function removespaces(ele)
+            {
+                if(ele!=" ") 
+                return ele;
+            }
+            let cleanArr=wordsArr.filter(removespaces).length;
+
+            document.getElementById("words").innerHTML=cleanArr;
+
+            
+        })
+
+       
+    </script>
+</body>
+</html>

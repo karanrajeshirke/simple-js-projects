@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Document</title>
+
+    <style>
+
+        .container
+        {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        p
+        {
+            width: 50%;
+            text-align: justify;
+        }
+
+        .btn
+        {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 2px solid gold;
+        }
+
+        #cornsilk
+        {
+            background-color: cornsilk;
+        }
+        #black
+        {
+            background-color: black;
+        }
+        #cornflowerblue
+        {
+            background-color: cornflowerblue;
+        }
+        #aqua
+        {
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+
+
+    <span id="cornsilk" class="btn" onclick="colorchanger('cornsilk') "></span>
+    <span id="black"  class="btn" onclick="colorchanger('black')"></span>
+    <span id="cornflowerblue"  class="btn" onclick="colorchanger('cornflowerblue')"></span>
+    <span id="aqua"  class="btn" onclick="colorchanger('aqua')"></span>
+
+    
+    <div class="container">
+
+        <h1 class="text">Background Color Changer</h1>
+        <img src="img/1.jpg" alt="" width="50%" height="500px">
+    
+        <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo, ut magnam voluptas ullam repellendus ipsum temporibus adipisci laboriosam possimus asperiores nihil minus odit, provident veritatis minima sequi aperiam iure placeat.
+        Commodi voluptates, veniam in maiores ullam maxime dolores distinctio, enim quod qui quae. Ipsum unde aliquam harum dolor veritatis libero ad eveniet ab distinctio, quam sunt enim rerum vel possimus.
+        In, nostrum. Neque culpa expedita facere nostrum in. Inventore eius dolorem quod voluptas dicta quam deserunt quisquam aspernatur eum similique deleniti quibusdam et sequi, odio odit officiis, exercitationem vitae iusto!
+        Est rem laboriosam ad minus adipisci libero ipsa deserunt voluptate nulla, quibusdam aliquam, molestias iste officia id atque, temporibus aut nemo! Aspernatur, sit quasi cumque eaque nulla nisi delectus nihil.
+        Est labore veniam eius rerum illum deserunt quia dolor reiciendis similique laboriosam magni, sed libero aliquid alias exercitationem saepe iusto tenetur voluptate aperiam maiores magnam tempora neque. Perferendis, similique architecto! Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt quos maiores recusandae ducimus culpa ipsam possimus et nostrum esse dicta! Obcaecati consequatur error fugit natus nostrum, corporis inventore quasi in?
+        Molestias atque provident, soluta consectetur natus nisi nulla reprehenderit possimus ipsam ad maxime repudiandae! Vero itaque unde a, earum delectus quaerat esse animi consequatur! Error corporis delectus ipsum inventore maxime? lorem*</p>
+
+    </div>
+   
+    <script>
+
+        let text=document.getElementsByClassName("text");
+
+       function colorchanger(color)
+       {
+            document.body.style.backgroundColor=color;
+
+            if(color=="black")
+            {   
+                for( let tags of text)
+                {
+                    tags.style.color="white";
+                }
+            }
+            else
+            {
+                for( let tags of text)
+                {
+                    tags.style.color="black";
+                }
+            }
+       }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: black;
+            border: 2px solid white;
+        }
+        .container
+        {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            max-width: 500px;
+            border: 2px solid black;
+            min-height: 70vh;
+            margin: 40px auto;
+            padding: 20px;
+            gap: 8px;
+            border-radius: 8px;
+            background-color: white;
+        }
+
+        .container button
+        {
+        font-size: 20px; 
+        font-weight: 600;
+        border: none;
+        background: none; 
+        box-shadow: 0px 0px 8px #999999;
+        border-radius: 8px;
+        cursor: pointer;
+        
+        }
+        .container button:hover
+        {
+            background-color: rgb(191, 191, 191);
+        }
+        .output
+        {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            grid-column: 1/-1;
+            color:white;
+            font-size: 40px;
+            padding: 20px;
+            background-color: #609cc2;
+            border-radius: 4px;
+        }
+        #equalto-button
+        {
+            grid-column:3/span 2;
+        }
+        #clear-button
+        {
+            grid-column: 1/4;
+
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+
+        <div class="output">
+            <div id="result"></div>
+        </div>
+        <button id="clear-button">C</button>
+        <!-- <button id="delete-button">&larr;</button> -->
+        <button id="divide-button">/</button>
+        <button class="number">7</button>
+        <button class="number">8</button>
+        <button class="number">9</button>
+        <button id="multiply-button">*</button>
+        <button class="number">4</button>
+        <button class="number">5</button>
+        <button class="number">6</button>
+        <button id="subtract-button">-</button>
+        <button class="number">1</button>
+        <button class="number">2</button>
+        <button class="number">3</button>
+        <button id="add-button">+</button>
+        <button id="decimal-button">.</button>
+        <button class="number">0</button>
+        <button id="equalto-button">=</button>
+
+        
+
+    </div>
+
+    <script>
+
+        let resultElement=document.getElementById("result");
+        let numberBtns=document.querySelectorAll(".number");
+        let clearBtn=document.getElementById("clear-button");
+        // let deleteBtn=document.getElementById("delete-button");
+        let divideBtn=document.getElementById("divide-button");
+        let multiplyBtn=document.getElementById("multiply-button");
+        let subtractBtn=document.getElementById("subtract-button");
+        let addBtn=document.getElementById("add-button");
+        let decimalBtn=document.getElementById("decimal-button");
+        let equaltoBtn=document.getElementById("equalto-button");
+
+        let result="";
+        let operation="";
+        let previousOperand=0;
+
+        //eg: 24 + 5
+        //initially when you hit 24 it would be in result
+        //result =24 
+        //now you hit + it goes in operation
+        //operation=+
+        //now you hit 5 
+        //at this point 24 goes in prevoius operand
+        //previousOperand=24
+        //and 5 goes in result
+        //result=5
+        //finally we add previousOperand and result and update result
+        //result=previousOperand + result 
+
+
+        //this is used to enter the number 
+         let appendNumber=(number)=>
+        {
+
+            if(number==='.' && result.includes('.'))
+            {
+                return;
+            }
+            
+            result=result+number;
+            updateDisplay();
+            
+        }
+
+        //update display
+        let updateDisplay = ()=>
+        {
+            if(operation)
+            {
+                resultElement.innerText=`${previousOperand} ${operation} ${result}`;
+                console.log("previousOperand  : " + previousOperand );
+                console.log("operation   :" + operation);
+                console.log("result    : " + result );
+
+            }
+            else
+            {
+                
+                resultElement.innerText=result;
+
+                console.log("clicked.." + result);
+            }
+        }
+
+
+        //this is when you click on a number button (0,1,2,3,4,5,6,7,8,9)
+        numberBtns.forEach((button) =>{
+            button.addEventListener('click',()=>{
+                appendNumber(button.innerText);
+            });
+        });
+
+
+        //adding event listener on decimal button
+
+        decimalBtn.addEventListener('click',()=>appendNumber('.'))
+
+        //function to select Operator
+
+        let selectOperator=(operatorValue)=>
+        {
+            //this case is when there is nothing on display and you use any operation
+            if(result==="") 
+            {
+            return;
+            }
+            //this is you have 24 on the screen
+
+            //1) now if you directly hit = this 24= is not valid therfore operation!="" case is handled
+
+            //2) if you have 24 + in your result and you hit = then not valid at this time you have previousOperand as empty therfore we have  previousOperand!=="" case
+            if(operation!=="" && previousOperand!=="")
+            {
+                calculateResult();
+            }
+
+            operation=operatorValue;
+            previousOperand=result;
+            result="";
+            updateDisplay();
+
+        }
+
+        let clearDisplay=()=>
+        {
+            result="";
+            previousOperand="";
+            operation="";
+            updateDisplay();
+        }
+        let calculateResult=()=>
+        {
+            let evaluatedResult;
+            const prev=Number(previousOperand);
+            const current=Number(result);
+
+            console.log("inside calc res");
+           console.log("prev " + prev + "current : " +current);
+            if(isNaN(prev) || isNaN(current))
+            {
+                return ;
+            }
+
+            switch(operation)
+            {
+                case '+' : evaluatedResult=prev + current;
+                            break;
+                case '-' : evaluatedResult=prev - current;
+                            break;
+                case '/' :   evaluatedResult=prev / current;
+                            break;
+                case '*' : evaluatedResult=prev * current;
+                            break;  
+                default:    return ;
+            }
+
+            result=evaluatedResult.toString();
+            operation="";
+            previousOperand="";
+            updateDisplay();
+        }
+
+        clearBtn.addEventListener('click',clearDisplay);
+        // deleteBtn.addEventListener('click',decimalBtn)
+        addBtn.addEventListener('click',()=>selectOperator('+'));
+        multiplyBtn.addEventListener('click',()=>selectOperator('*'));
+        divideBtn.addEventListener('click',()=>selectOperator('/'));
+        subtractBtn.addEventListener('click',()=>selectOperator('-'));
+
+
+        equaltoBtn.addEventListener('click',()=>
+        {
+            
+            if(result==="")
+            {
+                console.log("inside of if");
+                return ;
+            }
+            console.log("here");
+            calculateResult();
+            updateDisplay();
+        });
+
+
+
+    </script>
+    
+</body>
+</html>

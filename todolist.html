@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+
+        *
+        {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .main
+        {
+            background: burlywood;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .container
+        {
+            background-color: white;
+            border-radius: 5px;
+            width: 400px;
+            height: 600px;
+            padding: 15px;
+        }
+
+        .input-group
+        {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        #input-text-field
+        {
+            font-size: 25px;
+            font-weight: bold;
+             letter-spacing: 2px;
+            width: 100%;
+            padding: 10px;
+        }
+
+        #add-btn
+        {
+            padding: 7px 9px;
+            border: none;
+            background-color: cyan;
+
+        }
+        /* .todos-container
+        {
+            
+        } */
+
+        .todo-item-container
+        {
+            display: flex;
+            
+        }
+        #todo-text
+        {
+            width: 100%;
+            font-size: 20px;
+            letter-spacing: 1.5px;
+            user-select: none;
+        }
+        .line-through
+        {
+            text-decoration: line-through;
+            color: blue;
+        }
+        #edit-button,#delete-button
+        {
+            border: none;
+            background-color: transparent;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <div class="main">
+        <div class="container">
+            <h2>To do List</h2>
+
+            <div class="input-group">
+                <input type="text"  id="input-text-field" autofocus>
+                <button id="add-btn">
+                    <img src="img/add.svg" alt="">
+                </button>
+            </div>
+
+            <div class="todos-container">
+
+                
+                <!-- we will create this using js -->
+
+
+                <!-- <div class="todo-item-container">
+
+                    <p id="todo-text">gym</p>
+                    <button id="edit-button">
+                        <img src="img/edit.svg" alt="">
+                    </button>
+                    <button id="edit-button">
+                        <img src="img/delete.svg" alt="">
+                    </button>
+                </div> -->
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let textInputField=document.querySelector('#input-text-field');
+        let addbutton=document.querySelector('#add-btn');
+        let todosContainer=document.querySelector('.todos-container');
+
+
+        addbutton.addEventListener('click',()=>
+        {
+            if(textInputField.value.trim().length===0)
+            {
+                alert("empty field cannot be entered");
+                return;
+            }
+            
+            //creating
+
+            let todoItemContainer=document.createElement('div');
+            todoItemContainer.className="todo-item-container";
+            todosContainer.appendChild(todoItemContainer);
+
+            let todoText=document.createElement('p');
+            todoText.id="todo-text";
+            todoText.textContent=textInputField.value;
+            todoItemContainer.appendChild(todoText);
+
+
+            let editButton=document.createElement('button');
+            editButton.id="edit-button";
+
+            let editImg=document.createElement('img');
+            editImg.src="img/add.svg";
+            todoItemContainer.appendChild(editButton);
+            editButton.appendChild(editImg);
+          
+
+          
+
+          let deleteButton=document.createElement('button');
+          deleteButton.id="delete-button";
+
+            let deleteImg=document.createElement('img');
+            deleteImg.src="img/delete.svg";
+          todoItemContainer.appendChild(deleteButton);
+
+        deleteButton.appendChild(deleteImg);
+
+
+
+            todoText.addEventListener("dblclick",()=>
+            {
+                    todoText.className="line-through";
+                    editButton.setAttribute("disabled","disabled");
+
+            });
+
+            
+            editButton.addEventListener('click',()=>
+            {
+                let currentText=todoText.innerHTML;
+
+                let newtext=prompt("Edit task : ",currentText);
+
+
+                if(newtext.trim().length===0)
+                {
+                    alert("Empty field cannot be entered");
+                    return ;
+                }
+
+                todoText.innerHTML=newtext;
+            });
+
+            deleteButton.addEventListener('click',()=>
+            {
+                let parentOfEditButton=editButton.parentNode;
+                let mainparent=parentOfEditButton.parentNode;
+                mainparent.removeChild(parentOfEditButton);
+            })
+
+            textInputField.value="";
+        });
+    </script>
+</body>
+</html>

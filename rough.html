@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Username and Password Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h2>User Registration</h2>
+
+<form id="registrationForm" onsubmit="validateForm()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <span id="usernameError" class="error"></span><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <span id="passwordError" class="error"></span><br>
+
+    <input type="submit" value="Register">
+</form>
+
+<script>
+function validateForm() {
+    // Get form elements
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    // Reset error messages
+    document.getElementById("usernameError").innerHTML = "";
+    document.getElementById("passwordError").innerHTML = "";
+
+    // Validation rules
+    var usernameMinLength = 4;
+    var passwordMinLength = 6;
+
+    // Validate username
+    if (username.length < usernameMinLength) {
+        document.getElementById("usernameError").innerHTML = "Username must be at least " + usernameMinLength + " characters.";
+        return false;
+    }
+
+    // Validate password
+    if (password.length < passwordMinLength) {
+        document.getElementById("passwordError").innerHTML = "Password must be at least " + passwordMinLength + " characters.";
+        return false;
+    }
+
+    // If the form is valid, it will be submitted
+    return true;
+}
+</script>
+
+</body>
+</html>

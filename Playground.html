@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buttons Example</title>
+</head>
+<body>
+  <!-- Container to hold the buttons -->
+  <div id="button-container"></div>
+
+  <script>
+    // Get the container element by its ID
+    const buttonContainer = document.getElementById("button-container");
+
+    // Loop to create 10 buttons
+    for (let i = 1; i <= 10; i++) {
+      // Create a new button element
+      const button = document.createElement("button");
+
+      // Set button text and attributes
+      button.textContent = `Button ${i}`;
+      button.setAttribute("id", `button${i}`);
+      button.setAttribute("class", "my-button-class"); // Optional: Add a CSS class
+
+      // Append the button to the container
+      buttonContainer.appendChild(button);
+    }
+  </script>
+</body>
+</html>
